@@ -74,7 +74,9 @@ const run = async (): Promise<void> => {
   const data = response.data;
   data.choices = data.choices?.map((choice) => {
     if (choice.message?.content) {
-      choice.message.content = choice.message?.content?.replace(/(?:\r\n|\r|\n)/g, '');
+      // choice.message.content = choice.message?.content?.replace(/(?:\r\n|\r|\n)/g, '');
+      choice.message.content = choice.message?.content?.replace(/,/g, '\,');
+      choice.message.content = choice.message?.content?.replace(/'/g, '\'');
     }
     return choice;
   });

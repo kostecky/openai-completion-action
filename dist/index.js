@@ -10979,9 +10979,10 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield openai.createChatCompletion(payload);
     const data = response.data;
     data.choices = (_a = data.choices) === null || _a === void 0 ? void 0 : _a.map((choice) => {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         if ((_a = choice.message) === null || _a === void 0 ? void 0 : _a.content) {
-            choice.message.content = (_c = (_b = choice.message) === null || _b === void 0 ? void 0 : _b.content) === null || _c === void 0 ? void 0 : _c.replace(/(?:\r\n|\r|\n)/g, '');
+            choice.message.content = (_c = (_b = choice.message) === null || _b === void 0 ? void 0 : _b.content) === null || _c === void 0 ? void 0 : _c.replace(/,/g, '\,');
+            choice.message.content = (_e = (_d = choice.message) === null || _d === void 0 ? void 0 : _d.content) === null || _e === void 0 ? void 0 : _e.replace(/'/g, '\'');
         }
         return choice;
     });
