@@ -72,15 +72,8 @@ const run = async (): Promise<void> => {
   core.info(`Request using model: ${payload.model}\n${JSON.stringify(payload, null, 2)}`);
   const response = await openai.createChatCompletion(payload);
   const data = response.data;
-  data.choices = data.choices?.map((choice) => {
-    if (choice.message?.content) {
-      // choice.message.content = choice.message?.content?.replace(/(?:\r\n|\r|\n)/g, '');
-      choice.message.content = choice.message?.content?.replace(/,/g, '\,');
-      choice.message.content = choice.message?.content?.replace(/'/g, '\'');
-    }
-    return choice;
-  });
-  core.setOutput('response', JSON.stringify(data));
+  // Must run JSON.stringify twice to get the stringified JSON to be properly escaped for GitHub Actions
+  core.setOutput('response', JSON.stringify(JSON.stringify(data)));
 };
 
 export default run;
