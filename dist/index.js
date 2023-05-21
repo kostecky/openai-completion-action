@@ -10965,7 +10965,6 @@ function getInputs() {
 }
 exports.getInputs = getInputs;
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     const input = getInputs();
     input.messages = [{
             role: 'user',
@@ -10978,13 +10977,6 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     core.info(`Request using model: ${payload.model}\n${JSON.stringify(payload, null, 2)}`);
     const response = yield openai.createChatCompletion(payload);
     const data = response.data;
-    data.choices = (_a = data.choices) === null || _a === void 0 ? void 0 : _a.map((choice) => {
-        var _a;
-        if ((_a = choice.message) === null || _a === void 0 ? void 0 : _a.content) {
-            choice.message.content = JSON.stringify(choice.message.content);
-        }
-        return choice;
-    });
     core.setOutput('response', JSON.stringify(data));
 });
 exports["default"] = run;
